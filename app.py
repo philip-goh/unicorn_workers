@@ -1,13 +1,13 @@
+import eventlet
+# Comment this out to disable eventlet monkey patching. This will mean that the
+# `sleep` function is synchronous and will block.
+eventlet.monkey_patch()
 from flask import Flask
 import time
-import eventlet
 import logging
 
 logging.basicConfig(level=logging.DEBUG, format="%(asctime)s;%(levelname)s;%(message)s")
 
-# Comment this out to disable eventlet monkey patching. This will mean that the
-# `sleep` function is synchronous and will block.
-eventlet.monkey_patch()
 
 app = Flask(__name__)
 counter = 0
