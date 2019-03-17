@@ -12,6 +12,8 @@ The default worker. Handles 1 request per worker at a time.
 This appears to be the simplest way of scaling out requests that are IO bound. As we have 10 threads,
 we can handle 10 concurrent requests.
 
+The added benefit of this is that we can also handle multiple connections that are not IO bound.
+
 ## eventlet
 
 If monkey_patch works, then we can handle loads of concurrent requests. In the test case, we can handle 24 requests concurrently.
@@ -19,6 +21,9 @@ If monkey_patch works, then we can handle loads of concurrent requests. In the t
 Scaling works, but the long running calls need to be monkey patchable. If you comment out
 the `eventlet.monkey_patch()` call in app.py, the requests end up being handled in a synchronous
 manner, 1 after the other.
+
+However, if we encounter CPU bound code or code that is not eventlet aware then we fall back to synchronous
+behaviour.
 
 ## Discussion
 
