@@ -33,3 +33,5 @@ any code, no special patching needed.
 Eventlet will scale very phenomenally well provided that the long IO bound functions are patchable. If they aren't,
 then this will revert back to _synchronous_ behaviour. If you can't guarantee that all functions are patchable
 it might be safer to go with threads.
+
+Turns out that gunicorn used to automatically `monkey_patch`. But there has been a bug since August 2018 that means that gunicorn isn't monkey patching. See [this bug](https://github.com/benoitc/gunicorn/issues/1847)
